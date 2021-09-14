@@ -1,0 +1,6 @@
+framework module github_action_pod_test {
+  umbrella header "github_action_pod_test-umbrella.h"
+
+  export *
+  module * { export * }
+}

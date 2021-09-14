@@ -1,0 +1,27 @@
+PODS:
+  - github_action_pod_test (0.1.0)
+  - Nimble (8.0.9)
+  - Quick (2.2.1)
+
+DEPENDENCIES:
+  - github_action_pod_test (from `../`)
+  - Nimble (~> 8.0.7)
+  - Quick (~> 2.2.0)
+
+SPEC REPOS:
+  trunk:
+    - Nimble
+    - Quick
+
+EXTERNAL SOURCES:
+  github_action_pod_test:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  github_action_pod_test: e381889c4609f0de8f43d7fdb5cc048ef87b9b51
+  Nimble: 98b888285a615fd34f20e61753cf58ea1402bde4
+  Quick: f5754d69b7013f5864c29aab9ae6f0c79c5bc200
+
+PODFILE CHECKSUM: d368f4f9e0c193377da9a4c257c4a81e7ff7c598
+
+COCOAPODS: 1.10.2

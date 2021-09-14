@@ -1,0 +1,22 @@
+{
+  "name": "github_action_pod_test",
+  "version": "0.1.0",
+  "summary": "A short description of github_action_pod_test.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/zalazara/github_action_pod_test",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "zalazara": "azalazar@veritran.com"
+  },
+  "source": {
+    "git": "https://github.com/zalazara/github_action_pod_test.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "github_action_pod_test/Classes/**/*"
+}
