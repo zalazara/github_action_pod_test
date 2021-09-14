@@ -1,0 +1,14 @@
+use_frameworks!
+
+platform :ios, '9.0'
+
+target 'github_action_pod_test_Example' do
+  pod 'github_action_pod_test', :path => '../'
+
+  target 'github_action_pod_test_Tests' do
+    inherit! :search_paths
+
+    pod 'Quick', '~> 2.2.0'
+    pod 'Nimble', '~> 8.0.7'
+  end
+end
