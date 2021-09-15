@@ -25,7 +25,9 @@ jobs:
         DRY_RUN: true # uncomment this to debug without commiting tag
         VERBOSE: false
     - uses: actions/checkout@v2
-    - run: sed -i '' -e "s/s.version          = '${{ steps.tagVersion.tag }}'/s.version          = '${{ steps.tagVersion.new_tag }}'/" github_action_pod_test.podspec
+    - run: |
+        cd ./
+        sed -i '' -e "s/s.version          = '${{ steps.tagVersion.tag }}'/s.version          = '${{ steps.tagVersion.new_tag }}'/" github_action_pod_test.podspec
     - name: Commit changes
       uses: EndBug/add-and-commit@v7
       with:
