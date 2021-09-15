@@ -1,5 +1,9 @@
 name: Validate pod
-on: [pull_request]
+on:
+  pull_request:
+    branches:
+      - master
+      - development
 jobs:
   build:
     name: Setup Cocoapods based on provided version
