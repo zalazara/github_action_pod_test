@@ -28,7 +28,7 @@ jobs:
     - name: Find and Replace
       uses: jacobtomlinson/gha-find-replace@master
       with:
-        find: "'0.1.0'"
+        find: "'0.0.2'"
         replace: "'${{ steps.tagVersion.outputs.new_tag }}'"
         include: "github_action_pod_test.podspec"
     - name: Commit changes
@@ -40,11 +40,11 @@ jobs:
     - name: Tag version
       uses: actions/github-script@v4.1.0
       with:
-          github-token: ${{ github.token }}
+          github-token: ${{ secrets.GTOKEN }}
           script: |
             github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: "refs/tags/${{ steps.tagVersion.new_tag }}",
+              ref: "refs/tags/${{ steps.tagVersion.outputs.new_tag }}",
               sha: context.sha
             })
