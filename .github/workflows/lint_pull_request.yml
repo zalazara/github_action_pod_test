@@ -24,4 +24,4 @@ jobs:
       uses: ty0x2333/cocoapods-action@master
       with:
         test: false
-        # additional_lint_params: --private
+        additional_lint_params: --allow-warnings
