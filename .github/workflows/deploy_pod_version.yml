@@ -40,7 +40,7 @@ jobs:
       with:
         default_author: github_actions
         message: '[skip ci] Change podspec version'
-        add: '*.podspec'
+        add: '*'
     - name: Tag version
       uses: actions/github-script@v4.1.0
       with:
