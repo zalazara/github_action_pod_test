@@ -39,7 +39,7 @@ jobs:
       uses: EndBug/add-and-commit@v7
       with:
         default_author: github_actions
-        message: '[skip ci] Change podspec version'
+        message: '[skip ci] Change README version'
         add: '*'
     - name: Tag version
       uses: actions/github-script@v4.1.0
