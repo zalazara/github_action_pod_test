@@ -21,15 +21,13 @@ jobs:
         RELEASE_BRANCHES: main,master
         DEFAULT_BUMP: patch        
         INITIAL_VERSION: 0.0.1
-        #CUSTOM_TAG: 0.0.1
         DRY_RUN: true # uncomment this to debug without commiting tag
         VERBOSE: false
-    - uses: actions/checkout@v2
     - name: Find and Replace
       uses: jacobtomlinson/gha-find-replace@master
       with:
-        find: "'0.0.2'"
-        replace: "'${{ steps.tagVersion.outputs.new_tag }}'"
+        find: "${{ steps.tagVersion.outputs.tag }}"
+        replace: "${{ steps.tagVersion.outputs.new_tag }}"
         include: "github_action_pod_test.podspec"
     - name: Commit changes
       uses: EndBug/add-and-commit@v7
