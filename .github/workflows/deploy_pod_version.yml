@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
     - uses: actions/checkout@v2
