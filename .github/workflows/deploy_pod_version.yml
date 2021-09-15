@@ -1,0 +1,44 @@
+name: Deploy Pod Version
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
+    runs-on: macOS-latest
+    timeout-minutes: 2
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+    - name: Bump version and push tag
+      id: tagVersion 
+      uses: anothrNick/github-tag-action@1.26.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GTOKEN }}
+        WITH_V: false
+        RELEASE_BRANCHES: main,master
+        DEFAULT_BUMP: patch        
+        INITIAL_VERSION: 0.0.1
+        #CUSTOM_TAG: 0.0.1
+        DRY_RUN: true # uncomment this to debug without commiting tag
+        VERBOSE: false
+    - run: sed -i '' -e "s/s.version          = '${{ steps.tagVersion.tag }}'/s.version          = '${{ steps.tagVersion.new_tag }}'/" github_action_pod_test.podspec
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v7
+      with:
+        default_author: github_actions
+        message: '[skip ci] Change podspec version'
+        add: '*.podspec'
+    - name: Tag version
+      uses: actions/github-script@v4.1.0
+      with:
+          github-token: ${{ github.token }}
+          script: |
+            github.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${{ steps.tagVersion.new_tag }}",
+              sha: context.sha
+            })
