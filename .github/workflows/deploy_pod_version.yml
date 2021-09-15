@@ -23,12 +23,18 @@ jobs:
         INITIAL_VERSION: 0.0.1
         DRY_RUN: true # uncomment this to debug without commiting tag
         VERBOSE: false
-    - name: Find and Replace
+    - name: Add new version to podspec
       uses: jacobtomlinson/gha-find-replace@master
       with:
         find: "${{ steps.tagVersion.outputs.tag }}"
         replace: "${{ steps.tagVersion.outputs.new_tag }}"
         include: "github_action_pod_test.podspec"
+    - name: Add new version to README
+      uses: jacobtomlinson/gha-find-replace@master
+      with:
+        find: "${{ steps.tagVersion.outputs.tag }}"
+        replace: "${{ steps.tagVersion.outputs.new_tag }}"
+        include: "README.md"
     - name: Commit changes
       uses: EndBug/add-and-commit@v7
       with:
