@@ -6,7 +6,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 - Xcode 13 
-- Swift 5
+- Swift 5.5
 
 ## Installation
 
