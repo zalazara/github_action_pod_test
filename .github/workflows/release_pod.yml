@@ -1,4 +1,4 @@
-name: Build Changelog
+name: Publish pod
 on:
   push:
     tags:
@@ -27,3 +27,12 @@ jobs:
           body: ${{steps.github_release.outputs.changelog}}
         env:
           GITHUB_TOKEN: ${{ secrets.GTOKEN }}
+      - name: setup-cocoapods
+        uses: maxim-lobanov/setup-cocoapods@v1
+        with:
+          version: 1.9.0
+      - name: Publish pod
+        uses: maxep/pod-repo-push-action@0.1.2
+        with:
+          repo-url: https://zalazara:${{ secrets.GTOKEN }}@github.com/zalazara/az-test-spec.git
+          args: --allow-warnings --sources=https://cdn.cocoapods.org/,https://github.com/zalazara/az-test-spec.git

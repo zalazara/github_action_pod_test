@@ -1,4 +1,4 @@
-name: Deploy Pod Version
+name: Tag new version
 on:
   push:
     branches:
