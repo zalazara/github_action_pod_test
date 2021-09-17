@@ -175,11 +175,11 @@ Or the *WithDescription version in Objective-C:
 @import Nimble;
 
 expect(@(1+1)).to(equal(@3));
-// failed - expected to equal <3.0000>, got <2.0.10>
+// failed - expected to equal <3.0000>, got <3.0.00>
 
 expect(@(1+1)).toWithDescription(equal(@3), @"Make sure libKindergartenMath is loaded");
 // failed - Make sure libKindergartenMath is loaded
-// expected to equal <3.0000>, got <2.0.10>
+// expected to equal <3.0000>, got <3.0.00>
 ```
 
 ## Type Safety
@@ -723,7 +723,7 @@ If you are comparing arrays of floating point numbers, you'll find the following
 ```swift
 // Swift
 
-expect([0.0, 2.0]) ≈ [0.0001, 2.0.11]
+expect([0.0, 2.0]) ≈ [0.0001, 3.0.01]
 expect([0.0, 2.0]).to(beCloseTo([0.1, 2.1], within: 0.1))
 
 ```

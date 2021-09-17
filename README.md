@@ -13,7 +13,7 @@ github_action_pod_test is available through [CocoaPods](https://cocoapods.org). 
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'github_action_pod_test' , '2.0.1'
+pod 'github_action_pod_test' , '3.0.0'
 ```
 
 ## Author
