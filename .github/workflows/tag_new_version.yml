@@ -18,9 +18,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GTOKEN }}
         WITH_V: false
-        RELEASE_BRANCHES: main,master
+        RELEASE_BRANCHES: master
         DEFAULT_BUMP: patch        
-        INITIAL_VERSION: 0.0.1
+        INITIAL_VERSION: 0.16.0
         DRY_RUN: true # uncomment this to debug without commiting tag
         VERBOSE: false
     - name: Add new version to podspec
@@ -29,12 +29,14 @@ jobs:
         find: "${{ steps.tagVersion.outputs.tag }}"
         replace: "${{ steps.tagVersion.outputs.new_tag }}"
         include: "github_action_pod_test.podspec"
+        exclude: ".git/*"
     - name: Add new version to README
-      uses: jacobtomlinson/gha-find-replace@master
+      uses: jacobtomlinson/gha-find-replace@v2
       with:
         find: "${{ steps.tagVersion.outputs.tag }}"
         replace: "${{ steps.tagVersion.outputs.new_tag }}"
         include: "README.md"
+        exclude: ".git/*"
     - name: Commit changes
       uses: EndBug/add-and-commit@v7
       with:
@@ -52,3 +54,25 @@ jobs:
               ref: "refs/tags/${{ steps.tagVersion.outputs.new_tag }}",
               sha: context.sha
             })
+    - name: Merge development -> staging
+      uses: devmasx/merge-branch@master
+      with:
+        type: now
+        from_branch: master
+        target_branch: development
+        github_token: ${{ secrets.GTOKEN }}
+    - name: Build Changelog
+      id: github_release
+      uses: mikepenz/release-changelog-builder-action@v2.4.1
+      with:
+        configuration: ".github/workflows/configuration.json"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GTOKEN }}
+    - name: Create Release
+      uses: actions/create-release@v1
+      with:
+        tag_name: ${{ steps.tagVersion.outputs.new_tag }}
+        release_name: ${{ steps.tagVersion.outputs.new_tag }}
+        body: ${{steps.github_release.outputs.changelog}}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GTOKEN }}

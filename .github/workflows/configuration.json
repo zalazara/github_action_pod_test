@@ -17,7 +17,7 @@
       "ignore"
     ],
     "sort": "ASC",
-    "template": "${{CHANGELOG}}\n\n<details>\n<summary>Other changes</summary>\n\n${{UNCATEGORIZED}}\n</details>",
+    "template": "${{CHANGELOG}}\n",
     "pr_template": "- ${{TITLE}}\n",
     "empty_template": "- no changes"
 }

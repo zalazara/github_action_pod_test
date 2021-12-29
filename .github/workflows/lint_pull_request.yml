@@ -3,10 +3,9 @@ on:
   pull_request:
     branches:
       - master
-      - development
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macOS-11
     steps:
     - name: Cancel previous jobs
       uses: styfle/cancel-workflow-action@0.6.0
@@ -16,7 +15,9 @@ jobs:
     - name: setup-cocoapods
       uses: maxim-lobanov/setup-cocoapods@v1
       with:
-        version: 1.9.0
+        version: 1.10.2
+    - name: Add AZ repo Spec
+      run: pod repo add az-test-spec https://zalazara:${{ secrets.GTOKEN }}@github.com/zalazara/az-test-spec.git
     - name: Install Dependences
       run: |
         cd Example
@@ -27,4 +28,4 @@ jobs:
       uses: ty0x2333/cocoapods-action@master
       with:
         test: false
-        additional_lint_params: --allow-warnings
+        additional_lint_params: --allow-warnings --sources=https://cdn.cocoapods.org/,https://github.com/zalazara/az-test-spec.git --verbose
