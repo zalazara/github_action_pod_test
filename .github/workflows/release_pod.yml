@@ -21,7 +21,7 @@ jobs:
         with:
           version: 1.10.2
       - name: Add AZ repo Spec
-        run: pod repo add icelandinteractive https://zalazara:${{ secrets.GTOKEN }}@github.com/zalazara/az-test-spec.git.git
+        run: pod repo add az-test-spec https://zalazara:${{ secrets.GTOKEN }}@github.com/zalazara/az-test-spec.git.git
       - name: Publish pod
         run: |
           set -eo pipefail
