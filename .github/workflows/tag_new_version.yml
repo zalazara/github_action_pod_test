@@ -11,6 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
+        token: ${{ secrets.GTOKEN }}
         fetch-depth: '0'
     - name: Bump version and push tag
       id: tagVersion 
