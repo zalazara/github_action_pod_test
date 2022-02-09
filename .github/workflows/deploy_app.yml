@@ -1,0 +1,23 @@
+name: Deploy App
+on: 
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Environment
+        required: true
+        options: 
+        - Staging 
+        - Production
+      branch:
+        description: 'Define branch name'     
+        required: true
+        default: 'master'
+
+jobs:
+  deploy:
+    name: Deploying to Testflight
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
