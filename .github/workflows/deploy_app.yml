@@ -9,6 +9,10 @@ on:
         options: 
         - Staging 
         - Production
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
 
 jobs:
   deploy:
