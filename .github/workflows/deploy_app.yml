@@ -2,7 +2,7 @@ name: Deploy App
 on: 
   workflow_dispatch:
     inputs:
-      name:
+      environment:
         type: choice
         description: Environment
         required: true
