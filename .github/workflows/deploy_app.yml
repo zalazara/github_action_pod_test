@@ -2,17 +2,13 @@ name: Deploy App
 on: 
   workflow_dispatch:
     inputs:
-      name:
+      environment:
         type: choice
         description: Environment
         required: true
         options: 
         - Staging 
         - Production
-      environment:
-        description: 'Environment to run tests against'
-        type: environment
-        required: true
 
 jobs:
   deploy:
