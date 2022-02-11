@@ -7,8 +7,8 @@ on:
         description: Environment
         required: true
         options: 
-        - Staging 
-        - Production
+        - beta 
+        - release
 
 jobs:
   deploy:
@@ -24,10 +24,4 @@ jobs:
       - name: Run fastlane beta
         uses: maierj/fastlane-action@v2.0.1
         with:
-          lane: 'beta'
-        if: {{ github.event.inputs.environment == 'Staging' }}
-      - name: Run fastlane release
-        uses: maierj/fastlane-action@v2.0.1
-        with:
-          lane: 'release'
-        if: {{ github.event.inputs.environment == 'Production' }}
+          lane: '{{ github.event.inputs.environment }}'
