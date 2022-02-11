@@ -9,6 +9,10 @@ on:
         options: 
         - Staging 
         - Production
+      branch:
+        description: 'Define branch name'     
+        required: true
+        default: 'master'
 
 jobs:
   deploy:
@@ -17,12 +21,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Deploy app
-        uses: yukiarrr/ios-build-action@v1.5.0
+      - name: Setup Ruby
+        uses: actions/setup-ruby@v1
         with:
-          project-path: Example/github_action_pod_test.xcodeproj
-          p12-base64: ${{ secrets.P12_BASE64 }}
-          mobileprovision-base64: ${{ secrets.MOBILEPROVISION_BASE64 }}
-          code-signing-identity: ${{ secrets.CODE_SIGNING_IDENTITY }}
-          team-id: ${{ secrets.TEAM_ID }}
-          workspace-path: Example/github_action_pod_test.xcworkspace
+          ruby-version: '2.7.2'
+      - name: Run fastlane beta
+        uses: maierj/fastlane-action@v2.0.1
+        with:
+          lane: 'beta'
+        if: {{ github.event.inputs.environment == 'Staging' }}
+      - name: Run fastlane release
+        uses: maierj/fastlane-action@v2.0.1
+        with:
+          lane: 'release'
+        if: {{ github.event.inputs.environment == 'Production' }}
