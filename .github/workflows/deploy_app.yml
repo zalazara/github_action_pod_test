@@ -24,4 +24,4 @@ jobs:
       - name: Run fastlane beta
         uses: maierj/fastlane-action@v2.0.1
         with:
-          lane: '{{ github.event.inputs.environment }}'
+          lane: ${{ github.event.inputs.environment }}
